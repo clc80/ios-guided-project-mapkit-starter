@@ -11,6 +11,8 @@ import MapKit
 
 class EarthquakesViewController: UIViewController {
     
+    private let quakeFetcher = QuakeFetcher()
+    
     @IBOutlet var mapView: MKMapView!
     private var userTrackingButton: MKUserTrackingButton!
     
@@ -30,5 +32,19 @@ class EarthquakesViewController: UIViewController {
             mapView.bottomAnchor.constraint(equalTo: userTrackingButton.bottomAnchor, constant: 20)
             
         ])
+        
+        fetchQuakes()
+    }
+    
+    func fetchQuakes() {
+        let visibleRegion = mapView.visibleMapRect
+        
+        quakeFetcher.fetchQuakes(in: visibleRegion) { (quakes, error) in
+            if let error = error {
+                NSLog("%@", "Error fetching quakes: \(error)")
+            }
+            print(quakes)
+        }
+        
     }
 }
