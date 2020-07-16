@@ -13,7 +13,7 @@ struct QuakeResults: Codable {
     let features: [Quake]
 }
 
-class Quake: NSObject, Codable, Hashable {
+class Quake: NSObject, Codable {
     
     let magnitude: Double
     let place: String
@@ -60,14 +60,6 @@ class Quake: NSObject, Codable, Hashable {
     
     override var hash: Int {
         identifier.hashValue
-    }
-    
-    internal init(magnitude: Double, place: String, time: Date, latitude: Double, longitude: Double) {
-        self.magnitude = magnitude
-        self.place = place
-        self.time = time
-        self.latitude = latitude
-        self.longitude = longitude
     }
 }
 
